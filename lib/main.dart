@@ -1,11 +1,8 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:otp_plus/otp_inputs.dart';
 import 'package:otp_plus/utils/enum/otp_field_shape.dart';
 
 import 'login.dart';
-import 'user.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,22 +19,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.grey),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class MyHomePageLoginScreenLogos extends StatelessWidget {
-  const MyHomePageLoginScreenLogos({super.key});
+class HomePageLoginScreenLogos extends StatelessWidget {
+  const HomePageLoginScreenLogos({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,14 +88,14 @@ class MyHomePageLoginScreenLogos extends StatelessWidget {
   }
 }
 
-class MyHomePageLoginForm extends StatefulWidget {
-  const MyHomePageLoginForm({super.key});
+class HomePageLoginForm extends StatefulWidget {
+  const HomePageLoginForm({super.key});
 
   @override
-  State<MyHomePageLoginForm> createState() => _MyHomePageLoginState();
+  State<HomePageLoginForm> createState() => _HomePageLoginState();
 }
 
-class _MyHomePageLoginState extends State<MyHomePageLoginForm> {
+class _HomePageLoginState extends State<HomePageLoginForm> {
   final _loginFormKey = GlobalKey<FormState>();
   final int _userNameMaxLength = 24;
   final int _otpLength = 6;
@@ -153,7 +150,10 @@ class _MyHomePageLoginState extends State<MyHomePageLoginForm> {
                     setState(() {
                       _otp = code;
                     });
-                  }
+                  },
+                  onSubmit: (code) {
+                    _loginFormKey.currentState?.reset();
+                  },
                 )
               ],
             ),
@@ -245,7 +245,7 @@ class _MyHomePageLoginState extends State<MyHomePageLoginForm> {
   }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -254,8 +254,8 @@ class _MyHomePageState extends State<MyHomePage> {
           spacing: 100,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MyHomePageLoginScreenLogos(),
-            MyHomePageLoginForm(),
+            HomePageLoginScreenLogos(),
+            HomePageLoginForm(),
           ],
         ),
       ),
